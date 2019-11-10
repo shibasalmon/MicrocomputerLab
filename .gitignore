@@ -1,0 +1,9 @@
+.DS_Store
+
+*.OBJ
+*.EXE
+config.sys
+autoexec.bat
+tmp
+test.asm
+Masm615

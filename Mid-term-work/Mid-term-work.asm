@@ -10,7 +10,7 @@ include GCD.h
     num2 dw 0000h
     gcd_result dw 0000h
     lcm_result dw 0000h
-    t dw 0000h
+    msg db 'Input two numbers: $'
 
 .stack 100h
     
@@ -18,6 +18,10 @@ include GCD.h
 main proc
     mov ax, @data
     mov ds, ax
+
+    mov ax, 0900h
+    lea dx, msg
+    int 21h
 
     inputNum num1, num2 ;input two numbers
     GCD num1, num2, gcd_result ;find the gcd

@@ -1,3 +1,4 @@
+; You can change the including library to switch between base-10 or base-16 ;
 include io10.h
 ;include io16.h
 include GCD.h
@@ -18,10 +19,11 @@ main proc
     mov ax, @data
     mov ds, ax
 
-    inputNum num1, num2
-    GCD num1, num2, gcd_result
-    outputGCD gcd_result
+    inputNum num1, num2 ;input two numbers
+    GCD num1, num2, gcd_result ;find the gcd
+    outputGCD gcd_result ;print gcd
 
+;;; compute the lcm
     mov ax, 0200h
     mov dl, 0ah
     int 21h
@@ -30,11 +32,15 @@ main proc
     mov bx, num2
     mul bl
 
+    mov dx, 00h
     mov bx, gcd_result
-    div bl
+    div bx
     mov lcm_result, ax
     and lcm_result, 00ffh
-    outputLCM lcm_result
+;;; compute the lcm
+
+    outputLCM lcm_result ;print lcm
+
     mov ax, 4c00h
     int 21h
 main endp

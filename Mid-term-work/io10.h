@@ -1,14 +1,16 @@
-inputNum macro num1, num2
+inputNum macro num1, num2 ;input two numbers
 push ax
 push cx
 push dx
+;;; input num1
     mov num1, 0000h
     mov cx, 0ffffh
-    input_while1: 
+    input_while1: ;input num1's loop
     push cx
         mov ah, 00h
         int 16h
-        pChar al
+        pChar al ;display input
+    ;;; judge input is a number or letter?
         cmp al, '0'
         jb end_input1
         cmp al, '9'
@@ -17,11 +19,12 @@ push dx
         shl num1, cl
         sub ax, '0'
         add num1, ax
+    ;;; judge input is a number or letter?
     pop cx
     loop input_while1
     end_input1:
     and num1, 00ffh
-
+;;; revise to number to base-10
     mov ax, num1
     mov bl, 10h
     div bl
@@ -29,14 +32,18 @@ push dx
     mov ax, 06h
     mul bl
     sub num1, ax
+;;; revise to number to base-10
+;;; input num1
 
+;;; input num2
     mov num2, 0000h
     mov cx, 0ffffh
-    input_while2: 
+    input_while2: ;input num2's loop
     push cx
         mov ah, 00h
         int 16h
-        pChar al
+        pChar al ;display input
+    ;;; judge input is a number or letter?
         cmp al, '0'
         jb end_input2
         cmp al, '9'
@@ -45,11 +52,12 @@ push dx
         shl num2, cl
         sub ax, '0'
         add num2, ax
+    ;;; judge input is a number or letter?
     pop cx
     loop input_while2
     end_input2:
     and num2, 00ffh
-
+;;; revise to number to base-10
     mov ax, num2
     mov bl, 10h
     div bl
@@ -57,11 +65,14 @@ push dx
     mov ax, 06h
     mul bl
     sub num2, ax
+;;; revise to number to base-10
+;;; input num2
 
-
+;;; new line
     mov ax, 0200h
     mov dl, 0ah
     int 21h
+;;; new line
 pop dx
 pop cx
 pop ax
@@ -77,12 +88,11 @@ pChar macro char
     pop ax
 endm
 
-outputGCD macro gcd_result
+outputGCD macro gcd_result ;print gcd
 push ax
 push bx
 push cx
 push gcd_result
-
     mov ax, gcd_result
     mov bl, 0ah
     div bl
@@ -113,11 +123,11 @@ pop bx
 pop ax
 endm
 
-outputLCM macro lcm_result
+outputLCM macro lcm_result ;print lcm
 push ax
 push bx
 push cx
-
+push lcm_result
     mov ax, lcm_result
     mov bl, 0ah
     div bl
@@ -142,6 +152,7 @@ push cx
         add bx, 04h
     pop cx
     loop print_Loop_lcm
+pop lcm_result
 pop cx
 pop bx
 pop ax

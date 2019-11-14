@@ -1,15 +1,17 @@
-inputNum macro num1, num2
+inputNum macro num1, num2 ;input two numbers
 push ax
 push cx
 push bx
 push dx
+;;; input num1
     mov num1, 0000h
     mov cx, 0ffffh
-    input_while1: 
+    input_while1: ;input num2's loop
     push cx
         mov ah, 00h
         int 16h
-        pChar al
+        pChar al ;display input
+    ;;; judge input is a number or letter?
         cmp al, '0'
         jb not_a_number1
         cmp al, '9'
@@ -28,18 +30,22 @@ push dx
             mov cl, 04h
             shl num1, cl
             add num1, ax
+    ;;; judge input is a number or letter?
     pop cx
     loop input_while1
     end_input1:
     and num1, 00ffh
+;;; input num1
 
+;;; input num2
     mov num2, 0000h
     mov cx, 0ffffh
-    input_while2: 
+    input_while2: ;input num2's loop
     push cx
         mov ah, 00h
         int 16h
-        pChar al
+        pChar al ;display input
+    ;;; judge input is a number or letter?
         cmp al, '0'
         jb not_a_number2
         cmp al, '9'
@@ -58,14 +64,18 @@ push dx
             mov cl, 04h
             shl num2, cl
             add num2, ax
+    ;;; judge input is a number or letter?
     pop cx
     loop input_while2
     end_input2:
     and num2, 00ffh
+;;; input num2
 
+;;; new line
     mov ax, 0200h
     mov dl, 0ah
     int 21h
+;;; new line
 pop dx
 pop cx
 pop bx
@@ -82,7 +92,7 @@ pChar macro char
     pop ax
 endm
 
-outputGCD macro gcd_result
+outputGCD macro gcd_result ;print gcd
 push ax
 push bx
 push cx
@@ -115,7 +125,7 @@ pop bx
 pop ax
 endm
 
-outputLCM macro lcm_result
+outputLCM macro lcm_result ;print lcm
 push ax
 push bx
 push cx

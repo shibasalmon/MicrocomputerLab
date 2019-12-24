@@ -23,5 +23,5 @@ main proc
     L2: 
         mov ax, 4c00h
         int 21h
-
+main endp
 end main
